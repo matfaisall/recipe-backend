@@ -1,16 +1,18 @@
 const {
-  getSearchFilter,
   getData,
   getDataById,
   postDataRecipe,
   putDataRecipe,
   deleteDataRecipeById,
+  getSearch,
+  getFilter,
 } = require("../controller/RecipeController");
 
 const express = require("express");
 const router = express.Router();
 
-router.get("/searchdata", getSearchFilter);
+router.get("/filterdata", getFilter);
+router.get("/searchdata", getSearch);
 router.get("/", getData);
 router.get("/:id", getDataById);
 router.post("/", postDataRecipe);

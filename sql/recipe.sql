@@ -105,4 +105,32 @@ SELECT
     category.name AS category
 FROM recipe
     JOIN category ON recipe.category_id = category_id
+WHERE recipe.title ILIKE '%su%';
+
+SELECT
+    recipe.id,
+    recipe.photo,
+    recipe.title,
+    recipe.ingredients,
+    category.name AS category
+FROM recipe
+    JOIN category ON recipe.category_id = category_id
 WHERE recipe.title ILIKE '%su%'
+OFFSET 10
+LIMIT 5;
+
+SELECT
+    recipe.id,
+    recipe.title,
+    recipe.ingredients,
+    recipe.photo,
+    category.name AS category
+FROM recipe
+    JOIN category ON recipe.category_id = category.id
+ORDER BY title asc
+OFFSET 1
+LIMIT 10;
+
+SELECT COUNT(*)
+FROM recipe
+    JOIN category ON recipe.category_id = category.id;

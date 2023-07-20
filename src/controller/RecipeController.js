@@ -4,6 +4,7 @@ const {
   postRecipe,
   putRecipe,
   deleteRecipeById,
+  getDataSearch,
   getDataFilter,
 } = require("../model/RecipeModel");
 
@@ -126,15 +127,21 @@ const RecipeController = {
     });
   },
 
-  getSearchFilter: async (req, res, next) => {
-    const { search, searchBy } = req.query;
+  getSearch: async (req, res, next) => {
+    const { search, searchBy, sort, page, limit } = req.query;
+
+    let pagination = page || 1;
+    let limiter = limit || 5;
 
     data = {
       search: search || "",
-      searchBy: searchBy || "",
+      searchBy: searchBy || "title",
+      offset: (pagination - 1) * limiter,
+      limit: limit || 5,
+      sort: sort,
     };
 
-    let dataSearch = await getDataFilter(data);
+    let dataSearch = await getDataSearch(data);
 
     if (dataSearch) {
       res.status(200).json({
@@ -144,6 +151,27 @@ const RecipeController = {
       });
     }
     // console.log(dataSearch);
+  },
+
+  getFilter: async (req, res, next) => {
+    const { sort, page, limit } = req.query;
+    let pagination = page || 1;
+    let limiter = limit || 5;
+
+    let data = {
+      offset: (pagination - 1) * limiter,
+      limit: limit || 5,
+      sort: sort || "ASC",
+    };
+
+    let dataFilter = await getDataFilter(data);
+    if (dataFilter) {
+      res.status(200).json({
+        status: 200,
+        message: "Filter data recipe successfully!",
+        data: dataFilter.rows,
+      });
+    }
   },
 };
 

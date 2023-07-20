@@ -95,14 +95,33 @@ const deleteRecipeById = async (id) => {
   });
 };
 
-const getDataFilter = async (data) => {
-  const { search, searchBy } = data;
+const getDataSearch = async (data) => {
+  const { search, searchBy, sort, offset, limit } = data;
+  // console.log("sort data:", typeof sort);
 
   // console.log("search search by - model", search, searchBy);
 
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.photo, category.name AS category FROM recipe JOIN category ON recipe.category_id = category.id WHERE ${searchBy} ILIKE '%${search}%'`,
+      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.photo, category.name AS category FROM recipe JOIN category ON recipe.category_id = category.id WHERE ${searchBy} ILIKE '%${search}%' OFFSET ${offset} LIMIT ${limit}`,
+      (error, result) => {
+        if (!error) {
+          // console.log("ini adalah result model", result);
+          resolve(result);
+        } else {
+          reject(error);
+        }
+      }
+    );
+  });
+};
+
+const getDataFilter = async (data) => {
+  const { sort, offset, limit } = data;
+
+  return new Promise((resolve, reject) => {
+    Pool.query(
+      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.photo, category.name AS category FROM recipe JOIN category ON recipe.category_id = category.id ORDER BY title ${sort} OFFSET ${offset} LIMIT ${limit}`,
       (error, result) => {
         if (!error) {
           // console.log("ini adalah result model", result);
@@ -121,5 +140,6 @@ module.exports = {
   postRecipe,
   putRecipe,
   deleteRecipeById,
+  getDataSearch,
   getDataFilter,
 };
