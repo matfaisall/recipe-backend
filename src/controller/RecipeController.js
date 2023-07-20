@@ -23,9 +23,13 @@ const RecipeController = {
     console.log(id);
     let dataRecipeById = await getRecipeById(parseInt(id));
 
-    // CREATE VALIDATION PLZ
-
-    console.log(dataRecipeById);
+    // CREATE VALIDATION
+    if (!id || isNaN(id) || id <= 0) {
+      return res.status(404).json({
+        status: 404,
+        message: "Your ID not found!",
+      });
+    }
 
     if (!dataRecipeById.rows[0]) {
       return res.status(404).json({
@@ -34,6 +38,7 @@ const RecipeController = {
         data: [],
       });
     }
+
     return res.status(200).json({
       status: 200,
       message: "get data recipe successfully",
@@ -47,7 +52,7 @@ const RecipeController = {
     if (!title || !ingredients || !category_id) {
       return res.status(404).json({
         status: 404,
-        message: "You have to enter the data",
+        message: "You have to enter the data, Please enter your data correctly",
       });
     }
 
@@ -71,12 +76,13 @@ const RecipeController = {
     const { title, ingredients, category_id } = req.body;
 
     if (!id || id <= 0 || isNaN(id)) {
-      return res.status(404).json({ message: "id wrong" });
+      return res
+        .status(404)
+        .json({ message: "your ID uncorrect! or Your ID not found!!" });
     }
 
     let dataRecipeId = await getRecipeById(parseInt(id));
 
-    console.log("put data");
     console.log(dataRecipeId.rows[0]);
 
     let data = {
@@ -86,7 +92,7 @@ const RecipeController = {
     };
 
     let result = putRecipe(data, id);
-    console.log(result);
+    // console.log(result);
 
     delete data.id;
 
@@ -94,10 +100,16 @@ const RecipeController = {
       .status(200)
       .json({ status: 200, message: "update data recipe success", data });
   },
+
   deleteDataRecipeById: async (req, res, next) => {
     const { id } = req.params;
 
     // Write the Validateion
+    if (!id || id <= 0 || isNaN(id)) {
+      return res
+        .status(404)
+        .json({ message: "your ID uncorrect! or Your ID not found!!" });
+    }
 
     let deleteData = await deleteRecipeById(parseInt(id));
 
@@ -114,16 +126,24 @@ const RecipeController = {
     });
   },
 
-  getFilter: async (req, res, next) => {
-    let dataFilter = await getDataFilter();
+  getSearchFilter: async (req, res, next) => {
+    const { search, searchBy } = req.query;
 
-    if (dataFilter) {
+    data = {
+      search: search || "",
+      searchBy: searchBy || "",
+    };
+
+    let dataSearch = await getDataFilter(data);
+
+    if (dataSearch) {
       res.status(200).json({
         status: 200,
-        message: "Get data filter successfully",
-        data: dataFilter.rows,
+        message: "Search Data recipe successfully!",
+        data: dataSearch.rows,
       });
     }
+    // console.log(dataSearch);
   },
 };
 

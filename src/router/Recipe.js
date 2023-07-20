@@ -1,4 +1,5 @@
 const {
+  getSearchFilter,
   getData,
   getDataById,
   postDataRecipe,
@@ -9,6 +10,7 @@ const {
 const express = require("express");
 const router = express.Router();
 
+router.get("/searchdata", getSearchFilter);
 router.get("/", getData);
 router.get("/:id", getDataById);
 router.post("/", postDataRecipe);

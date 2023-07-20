@@ -95,4 +95,14 @@ SELECT
     recipe.photo,
     category.name AS category
 FROM recipe
-    JOIN category ON recipe.category_id = category.id
+    JOIN category ON recipe.category_id = category.id;
+
+SELECT
+    recipe.id,
+    recipe.photo,
+    recipe.title,
+    recipe.ingredients,
+    category.name AS category
+FROM recipe
+    JOIN category ON recipe.category_id = category_id
+WHERE recipe.title ILIKE '%su%'
