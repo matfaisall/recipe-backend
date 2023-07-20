@@ -3,11 +3,18 @@ require("dotenv").config();
 const poolClient = require("./src/config/db");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const cors = require("cors");
 const Router = require("./src/router");
 
 const app = express();
 const port = 3000;
 
+let corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

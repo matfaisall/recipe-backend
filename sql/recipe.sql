@@ -18,23 +18,81 @@ ADD
 SELECT * FROM recipe;
 
 INSERT INTO
-    recipe (title, ingredients, category)
+    recipe (
+        photo,
+        title,
+        ingredients,
+        category_id
+    )
 VALUES (
+        'https://placehold.co/600x400',
         'Nasi goreng',
         'Nasi, Sambal, Krupuk',
-        'Makanan'
+        1
     ), (
+        'https://placehold.co/600x400',
         'Bakso Bakar',
         'Bakso, Cabai, Micin',
-        'Makanan'
+        2
     ), (
+        'https://placehold.co/600x400',
         'Mie Ayam Special',
         'Mie, Ayam, Sayur-sayur, Bakso, Keju',
-        'Makanan'
+        2
     ), (
+        'https://placehold.co/600x400',
         'Susu Soda',
         'Susu Bendera, Soda, Strauberry',
-        'Minuman'
+        3
+    ), (
+        'https://placehold.co/600x400',
+        'Susu Sapi',
+        'Susu Bendera, Soda, Strauberry',
+        1
+    ), (
+        'https://placehold.co/600x400',
+        'Susu Kambing',
+        'Susu Bendera, Soda, Strauberry',
+        3
+    ), (
+        'https://placehold.co/600x400',
+        'Susu Kudaa',
+        'Susu Bendera, Soda, Strauberry',
+        1
+    ), (
+        'https://placehold.co/600x400',
+        'Susu Bendera',
+        'Susu Bendera, Soda, Strauberry',
+        2
+    ), (
+        'https://placehold.co/600x400',
+        'Susu Kental Manis',
+        'Susu Bendera, Soda, Strauberry',
+        3
+    ), (
+        'https://placehold.co/600x400',
+        'Susu Kopi',
+        'Susu Bendera, Soda, Strauberry',
+        1
+    ), (
+        'https://placehold.co/600x400',
+        'Susu Teh',
+        'Susu Bendera, Soda, Strauberry',
+        3
+    ), (
+        'https://placehold.co/600x400',
+        'Susu Zee',
+        'Susu Bendera, Soda, Strauberry',
+        2
     );
 
 DROP TABLE recipe;
+
+SELECT
+    recipe.id,
+    recipe.title,
+    recipe.ingredients,
+    recipe.photo,
+    category.name AS category
+FROM recipe
+    JOIN category ON recipe.category_id = category.id
