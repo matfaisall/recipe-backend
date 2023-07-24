@@ -69,7 +69,7 @@ const UsersController = {
 
     let dataUserById = await getUserById(parseInt(id));
 
-    console.log(dataUserById.rows[0]);
+    // console.log(dataUserById.rows[0]);
 
     let data = {
       name: name || dataUserById.rows[0].name,
@@ -77,7 +77,7 @@ const UsersController = {
       password: password || dataUserById.rows[0].password,
     };
 
-    putUser(data, id);
+    let result = putUser(data, id);
 
     delete data.id;
 

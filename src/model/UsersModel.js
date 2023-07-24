@@ -41,17 +41,17 @@ const postUser = async (data) => {
   });
 };
 
-const putUser = async (id, data) => {
+const putUser = async (data, id) => {
   const { name, email, password } = data;
 
-  console.log("model put recipe");
+  // console.log("model put recipe");
 
   return new Promise((resolve, reject) => {
     Pool.query(
       `UPDATE users SET name='${name}', email='${email}', password='${password}' WHERE id=${id}`,
       (error, result) => {
         if (!error) {
-          console.log(result);
+          // console.log("result model", result);
           resolve(result);
         } else {
           reject(error.message);

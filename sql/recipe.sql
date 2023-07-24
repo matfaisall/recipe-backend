@@ -8,14 +8,29 @@ CREATE TABLE
         image VARCHAR(255),
         title VARCHAR(255) NOT NULL,
         ingredients TEXT,
-        category VARCHAR(20)
+        category_id INT,
+        users_id INT NOT NULL
     );
+
+ALTER TABLE recipe ADD COLUMN user_id INT;
 
 ALTER TABLE recipe
 ADD
     COLUMN created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
+-- membuat koneksi dari recipe ke tabel user --
+
+ALTER TABLE recipe ALTER COLUMN user_id SET NOT NULL;
+
+ALTER TABLE recipe ADD FOREIGN KEY (user_id) REFERENCES users(id);
+
+ALTER TABLE recipe
+ADD
+    FOREIGN KEY (category_id) REFERENCES category(id);
+
 SELECT * FROM recipe;
+
+TRUNCATE TABLE recipe;
 
 INSERT INTO
     recipe (

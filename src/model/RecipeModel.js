@@ -5,7 +5,7 @@ const Pool = require("../config/db");
 const getRecipe = async () => {
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipe.id, recipe.photo, recipe.title, recipe.ingredients, category.name AS category FROM recipe JOIN category ON recipe.category_id = category_id`,
+      `SELECT recipe.id, recipe.image, recipe.title, recipe.ingredients, category.name AS category FROM recipe JOIN category ON recipe.category_id = category_id`,
       (error, result) => {
         if (!error) {
           resolve(result);
@@ -34,11 +34,11 @@ const getRecipeById = async (id) => {
 // Model : for adding recipe data
 
 const postRecipe = async (data) => {
-  const { title, ingredients, category_id } = data;
+  const { title, ingredients, category_id, user_id } = data;
 
   return new Promise((resolve, reject) => {
     Pool.query(
-      `INSERT INTO recipe (photo, title, ingredients, category_id) VALUES ('https://placehold.co/600x400', '${title}', '${ingredients}', ${category_id})`,
+      `INSERT INTO recipe (image, title, ingredients, category_id, user_id) VALUES ('https://placehold.co/600x400', '${title}', '${ingredients}', ${category_id}, ${user_id})`,
       (error, result) => {
         if (!error) {
           resolve(result);
@@ -59,7 +59,7 @@ const putRecipe = async (data, id) => {
 
   return new Promise((resolve, reject) => {
     Pool.query(
-      `UPDATE recipe SET title='${title}', ingredients='${ingredients}, category_id='${category_id} WHERE id=${id}`,
+      `UPDATE recipe SET title='${title}', ingredients='${ingredients}', category_id=${category_id} WHERE id=${id}`,
       (error, result) => {
         if (!error) {
           resolve(result);
@@ -68,16 +68,6 @@ const putRecipe = async (data, id) => {
         }
       }
     );
-    // Pool.query(
-    //   `UPDATE recipe SET title='${title}', ingredients='${ingredients}', category_id = ${category_id} WHERE id=${id}`,
-    //   (error, result) => {
-    //     if (!error) {
-    //       resolve(result);
-    //     } else {
-    //       reject(error.message);
-    //     }
-    //   }
-    // );
   });
 };
 
@@ -103,7 +93,7 @@ const getDataSearch = async (data) => {
 
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.photo, category.name AS category FROM recipe JOIN category ON recipe.category_id = category.id WHERE ${searchBy} ILIKE '%${search}%' OFFSET ${offset} LIMIT ${limit}`,
+      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.image, category.name AS category FROM recipe JOIN category ON recipe.category_id = category.id WHERE ${searchBy} ILIKE '%${search}%' OFFSET ${offset} LIMIT ${limit}`,
       (error, result) => {
         if (!error) {
           // console.log("ini adalah result model", result);
@@ -117,11 +107,11 @@ const getDataSearch = async (data) => {
 };
 
 const getDataFilter = async (data) => {
-  const { sort, offset, limit } = data;
+  const { sort, offset, limit, sortBy } = data;
 
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.photo, category.name AS category FROM recipe JOIN category ON recipe.category_id = category.id ORDER BY title ${sort} OFFSET ${offset} LIMIT ${limit}`,
+      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.image, category.name AS category FROM recipe JOIN category ON recipe.category_id = category.id ORDER BY ${sortBy} ${sort} OFFSET ${offset} LIMIT ${limit}`,
       (error, result) => {
         if (!error) {
           // console.log("ini adalah result model", result);

@@ -46,8 +46,9 @@ const RecipeController = {
       data: dataRecipeById.rows[0],
     });
   },
+
   postDataRecipe: async (req, res, next) => {
-    const { title, ingredients, category_id } = req.body;
+    const { title, ingredients, category_id, user_id } = req.body;
 
     // CREATE VALIDATION ON HERE !!!
     if (!title || !ingredients || !category_id) {
@@ -61,6 +62,7 @@ const RecipeController = {
       title: title,
       ingredients: ingredients,
       category_id: category_id,
+      user_id: user_id,
     };
 
     postRecipe(data);
@@ -83,8 +85,6 @@ const RecipeController = {
     }
 
     let dataRecipeId = await getRecipeById(parseInt(id));
-
-    console.log(dataRecipeId.rows[0]);
 
     let data = {
       title: title || dataRecipeId.rows[0].title,
@@ -154,14 +154,15 @@ const RecipeController = {
   },
 
   getFilter: async (req, res, next) => {
-    const { sort, page, limit } = req.query;
+    const { sort, page, limit, sortBy } = req.query;
     let pagination = page || 1;
     let limiter = limit || 5;
 
     let data = {
       offset: (pagination - 1) * limiter,
       limit: limit || 5,
-      sort: sort || "ASC",
+      sort: sort,
+      sortBy: sortBy,
     };
 
     let dataFilter = await getDataFilter(data);
