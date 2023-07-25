@@ -5,7 +5,7 @@ const Pool = require("../config/db");
 const getRecipe = async () => {
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipe.id, recipe.image, recipe.title, recipe.ingredients, category.name AS category FROM recipe JOIN category ON recipe.category_id = category_id`,
+      `SELECT recipe.id, recipe.image, recipe.title, recipe.ingredients, category.name AS category, users.name AS author FROM recipe JOIN category ON recipe.category_id = category_id JOIN users ON recipe.users_id = users.id`,
       (error, result) => {
         if (!error) {
           resolve(result);
@@ -36,6 +36,7 @@ const getRecipeById = async (id) => {
 const postRecipe = async (data) => {
   const { title, ingredients, category_id, users_id } = data;
 
+  console.log("ini data model", data);
   return new Promise((resolve, reject) => {
     Pool.query(
       `INSERT INTO recipe (image, title, ingredients, category_id, users_id) VALUES ('https://placehold.co/600x400', '${title}', '${ingredients}', ${category_id}, ${users_id})`,

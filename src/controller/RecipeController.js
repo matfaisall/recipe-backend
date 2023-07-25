@@ -19,9 +19,10 @@ const RecipeController = {
       });
     }
   },
+
   getDataById: async (req, res, next) => {
     const { id } = req.params;
-    console.log(id);
+    // console.log(id);
     let dataRecipeById = await getRecipeById(parseInt(id));
 
     // CREATE VALIDATION
@@ -48,10 +49,14 @@ const RecipeController = {
   },
 
   postDataRecipe: async (req, res, next) => {
-    const { title, ingredients, category_id, users_id } = req.body;
+    const { title, ingredients, category_id } = req.body;
+
+    let users_id = req.payload.id;
+
+    console.log("ini user id : ", users_id);
 
     // CREATE VALIDATION ON HERE !!!
-    if (!title || !ingredients || !category_id) {
+    if (!title || !ingredients || !category_id || !users_id) {
       return res.status(404).json({
         status: 404,
         message: "You have to enter the data, Please enter your data correctly",
@@ -62,10 +67,11 @@ const RecipeController = {
       title: title,
       ingredients: ingredients,
       category_id: category_id,
-      users_id: users_id,
+      users_id,
     };
 
     postRecipe(data);
+    console.log("Data controller : ", data);
 
     return res.status(200).json({
       status: 200,
@@ -85,6 +91,18 @@ const RecipeController = {
     }
 
     let dataRecipeId = await getRecipeById(parseInt(id));
+
+    // console.log(dataRecipeId);
+    let users_id = req.payload.id;
+    // console.log(users_id);
+    // console.log(dataRecipeId.rows[0].users_id);
+
+    if (users_id != dataRecipeId.rows[0].users_id) {
+      return res.status(404).json({
+        status: 404,
+        message: "This content is not yours !",
+      });
+    }
 
     let data = {
       title: title || dataRecipeId.rows[0].title,
@@ -112,6 +130,16 @@ const RecipeController = {
         .json({ message: "your ID uncorrect! or Your ID not found!!" });
     }
 
+    let users_id = req.payload.id;
+    let dataRecipeId = await getRecipeById(parseInt(id));
+
+    if (users_id != dataRecipeId.rows[0].users_id) {
+      return res.status(404).status({
+        status: 404,
+        message: "This content is not yours!",
+      });
+    }
+
     let deleteData = await deleteRecipeById(parseInt(id));
 
     if (!deleteData) {
@@ -120,6 +148,7 @@ const RecipeController = {
         message: "Delete data failed, Data not found",
       });
     }
+
     return res.status(200).json({
       status: 200,
       message: "Delete data recipe successfully",

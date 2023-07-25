@@ -11,12 +11,14 @@ const {
 const express = require("express");
 const router = express.Router();
 
+const { Middleware } = require("../middleware/middleware");
+
 router.get("/filterdata", getFilter);
 router.get("/searchdata", getSearch);
-router.get("/", getData);
+router.get("/", Middleware, getData);
 router.get("/:id", getDataById);
-router.post("/", postDataRecipe);
-router.put("/:id", putDataRecipe);
-router.delete("/:id", deleteDataRecipeById);
+router.post("/", Middleware, postDataRecipe);
+router.put("/:id", Middleware, putDataRecipe);
+router.delete("/:id", Middleware, deleteDataRecipeById);
 
 module.exports = router;

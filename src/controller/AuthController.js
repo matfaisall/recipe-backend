@@ -1,5 +1,6 @@
 const argon2 = require("argon2");
 const { getUserByEmail, createUser } = require("../model/AuthModel");
+const GenerateToken = require("../../helpers/GenerateToken");
 
 const AuthController = {
   login: async (req, res, next) => {
@@ -37,6 +38,11 @@ const AuthController = {
 
     delete users.password;
 
+    let token = GenerateToken(users);
+    console.log("ini token JWT : ", token);
+
+    users.token = token;
+
     if (data) {
       return res.status(200).json({
         status: 200,
@@ -46,6 +52,7 @@ const AuthController = {
     }
   },
 
+  // === REGISTER === //
   register: async (req, res, next) => {
     let { name, email, password } = req.body;
 
