@@ -81,6 +81,8 @@ VALUES (
         2
     );
 
+ALTER TABLE recipe RENAME COLUMN user_id TO users_id;
+
 SELECT
     recipe.id,
     recipe.title,
@@ -91,4 +93,15 @@ FROM recipe
     JOIN category ON recipe.category_id = category.id
 ORDER BY title DESC
 OFFSET 0
-LIMIT 5
+LIMIT 5;
+
+-- Test login ---
+
+SELECT * FROM users WHERE email='guest@gmail.com';
+
+-- edit PASSWORD
+
+UPDATE users
+SET
+    password = '$argon2id$v=19$m=65536,t=3,p=4$J6+YWFQOHBLfcVdNu5tntA$50QnlBhSy5bElJ59pYcJZpe6O0Isl4YSa56bt03lXv4'
+WHERE email = 'guest@gmail.com';

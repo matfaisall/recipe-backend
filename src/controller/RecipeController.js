@@ -48,7 +48,7 @@ const RecipeController = {
   },
 
   postDataRecipe: async (req, res, next) => {
-    const { title, ingredients, category_id, user_id } = req.body;
+    const { title, ingredients, category_id, users_id } = req.body;
 
     // CREATE VALIDATION ON HERE !!!
     if (!title || !ingredients || !category_id) {
@@ -62,7 +62,7 @@ const RecipeController = {
       title: title,
       ingredients: ingredients,
       category_id: category_id,
-      user_id: user_id,
+      users_id: users_id,
     };
 
     postRecipe(data);

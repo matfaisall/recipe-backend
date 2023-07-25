@@ -1,4 +1,3 @@
-const bcrypt = require("bcrypt");
 const {
   getAllUsers,
   getUserById,
@@ -41,17 +40,12 @@ const UsersController = {
     });
   },
   pushDataUser: async (req, res, next) => {
-    const saltRounds = 10;
-
     const { name, email, password } = req.body;
-
-    // WRITE THE VALIDATION HERE
-    const hashPassword = await bcrypt.hash(password, saltRounds);
 
     let data = {
       name: name,
       email: email,
-      password: hashPassword,
+      password: password,
     };
 
     postUser(data);
