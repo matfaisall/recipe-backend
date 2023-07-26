@@ -12,6 +12,16 @@ const express = require("express");
 const router = express.Router();
 
 const { Middleware } = require("../middleware/middleware");
+// const multer = require("multer");
+// const path = require("path");
+
+// const storage = multer.diskStorage({
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + path.extname(file.originalname));
+//   },
+// });
+
+// const upload = multer({ storage });
 
 router.get("/filterdata", getFilter);
 router.get("/searchdata", getSearch);

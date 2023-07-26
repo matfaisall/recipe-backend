@@ -1,5 +1,3 @@
-// protect rename to middleware
-
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 

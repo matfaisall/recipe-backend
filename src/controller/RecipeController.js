@@ -8,6 +8,8 @@ const {
   getDataFilter,
 } = require("../model/RecipeModel");
 
+// const cloudinary = require("cloudinary").v2;
+
 const RecipeController = {
   getData: async (req, res, next) => {
     let dataRecipe = await getRecipe();
@@ -50,10 +52,10 @@ const RecipeController = {
 
   postDataRecipe: async (req, res, next) => {
     const { title, ingredients, category_id } = req.body;
-
+    // const image = req.file;
     let users_id = req.payload.id;
 
-    console.log("ini user id : ", users_id);
+    // console.log("ini user id : ", users_id);
 
     // CREATE VALIDATION ON HERE !!!
     if (!title || !ingredients || !category_id || !users_id) {
@@ -63,12 +65,34 @@ const RecipeController = {
       });
     }
 
+    // let type = image.mimetype.split("/")[1];
+    // console.log(type);
+
+    // if (
+    //   type.toLowerCase() != "png" &&
+    //   type.toLowerCase() != "jpg" &&
+    //   type != "jpeg"
+    // ) {
+    //   return res.status(404).json({
+    //     status: 404,
+    //     message: "File foto tidak sesuai",
+    //   });
+    // }
+
+    // const result = await cloudinary.uploader.upload(image.path, {
+    //   use_filename: true,
+    //   folder: "file-upload",
+    // });
+
     let data = {
+      // image: result.secure_url,
       title: title,
       ingredients: ingredients,
       category_id: category_id,
       users_id,
     };
+    console.log("ini data recipe controller");
+    console.log(data);
 
     postRecipe(data);
     console.log("Data controller : ", data);
