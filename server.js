@@ -7,8 +7,9 @@ const cors = require("cors");
 const Router = require("./src/router");
 
 const app = express();
-const port = 3100;
+const port = 3000;
 
+// use middleware package
 let corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200,
@@ -17,11 +18,13 @@ let corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(morgan("combined"));
 
+// use multer
+// app.use("/image", express.static("./tmp"));
+
 app.get("/", (req, res) => {
-  res.status(200).json({ status: 200, message: "server running" });
+  res.status(200).json({ status: 200, message: "Server running..." });
 });
 
 app.use(Router);
@@ -30,6 +33,7 @@ app.listen(port, () => {
   console.log(`aplikasi ini jalan di port ${port}`);
 });
 
+// check is DB Connected
 poolClient
   .connect()
   .then((client) => {

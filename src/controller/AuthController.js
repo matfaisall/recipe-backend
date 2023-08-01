@@ -10,7 +10,7 @@ const AuthController = {
     if (!email || !password) {
       return res.status(404).json({
         status: 404,
-        message: "email dan password harus diisi",
+        message: "email and password required!",
       });
     }
 
@@ -19,7 +19,7 @@ const AuthController = {
     if (!data.rows[0]) {
       return res.status(404).json({
         status: 404,
-        message: "email anda belum terdaftar",
+        message: "Your email is not registered, Please register",
       });
     }
 
@@ -30,7 +30,7 @@ const AuthController = {
     if (!verify) {
       return res.status(404).json({
         status: 404,
-        message: "password yang anda inputkan salah",
+        message: "Your password is incorrect",
       });
     }
 
@@ -39,14 +39,14 @@ const AuthController = {
     delete users.password;
 
     let token = GenerateToken(users);
-    console.log("ini token JWT : ", token);
+    // console.log("ini token JWT : ", token);
 
     users.token = token;
 
     if (data) {
-      return res.status(200).json({
-        status: 200,
-        message: "get data user successfully",
+      return res.status(201).json({
+        status: 201,
+        message: "Login Successfully",
         data: users,
       });
     }
@@ -59,7 +59,7 @@ const AuthController = {
     if (!name || !email || !password) {
       return res.status(404).json({
         status: 404,
-        message: "email dan password harus diisi dengan benar",
+        message: "email and password required!",
       });
     }
 
@@ -68,7 +68,7 @@ const AuthController = {
     if (user.rows[0]) {
       return res.status(404).json({
         status: 404,
-        message: "email sudah terdaftar silahkan login",
+        message: "Your email is already registered, please login.",
       });
     }
 
@@ -87,13 +87,13 @@ const AuthController = {
     if (!data.rowCount == 1) {
       return res.status(404).json({
         status: 404,
-        message: "registrasi gagal",
+        message: "Failed registration.",
       });
     }
 
     return res.status(200).json({
       status: 200,
-      message: "registrasi berhasil",
+      message: "Registration successful",
     });
   },
 };

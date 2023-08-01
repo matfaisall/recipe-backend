@@ -8,7 +8,7 @@ const {
   getDataFilter,
 } = require("../model/RecipeModel");
 
-// const cloudinary = require("cloudinary").v2;
+const cloudinary = require("../config/photo");
 
 const RecipeController = {
   getData: async (req, res, next) => {
@@ -50,12 +50,17 @@ const RecipeController = {
     });
   },
 
+  // Post data
   postDataRecipe: async (req, res, next) => {
     const { title, ingredients, category_id } = req.body;
+
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "recipe",
+    });
+    console.log(result);
+
     // const image = req.file;
     let users_id = req.payload.id;
-
-    // console.log("ini user id : ", users_id);
 
     // CREATE VALIDATION ON HERE !!!
     if (!title || !ingredients || !category_id || !users_id) {
@@ -65,45 +70,24 @@ const RecipeController = {
       });
     }
 
-    // let type = image.mimetype.split("/")[1];
-    // console.log(type);
-
-    // if (
-    //   type.toLowerCase() != "png" &&
-    //   type.toLowerCase() != "jpg" &&
-    //   type != "jpeg"
-    // ) {
-    //   return res.status(404).json({
-    //     status: 404,
-    //     message: "File foto tidak sesuai",
-    //   });
-    // }
-
-    // const result = await cloudinary.uploader.upload(image.path, {
-    //   use_filename: true,
-    //   folder: "file-upload",
-    // });
-
     let data = {
-      // image: result.secure_url,
+      image: result.secure_url,
       title: title,
       ingredients: ingredients,
       category_id: category_id,
       users_id,
     };
-    console.log("ini data recipe controller");
-    console.log(data);
 
     postRecipe(data);
-    console.log("Data controller : ", data);
 
-    return res.status(200).json({
-      status: 200,
+    return res.status(201).json({
+      status: 201,
       message: "Data recipe created successfuly!",
       data,
     });
   },
 
+  // Update Recipe
   putDataRecipe: async (req, res, next) => {
     const { id } = req.params;
     const { title, ingredients, category_id } = req.body;
@@ -115,33 +99,61 @@ const RecipeController = {
     }
 
     let dataRecipeId = await getRecipeById(parseInt(id));
-
-    // console.log(dataRecipeId);
     let users_id = req.payload.id;
-    // console.log(users_id);
-    // console.log(dataRecipeId.rows[0].users_id);
 
-    if (users_id != dataRecipeId.rows[0].users_id) {
-      return res.status(404).json({
-        status: 404,
-        message: "This content is not yours !",
+    console.log(req.file);
+
+    // check photo
+    if (!req.file) {
+      if (users_id != dataRecipeId.rows[0].users_id) {
+        return res.status(404).json({ message: "This content is not yours!" });
+      }
+
+      let data = {
+        title: title || dataRecipeId.rows[0].title,
+        ingredients: ingredients || dataRecipeId.rows[0].ingredients,
+        category_id: parseInt(category_id) || dataRecipeId.rows[0].category_id,
+        image: dataRecipeId.rows[0].image,
+      };
+
+      putRecipe(data, id);
+      delete data.id;
+
+      return res
+        .status(200)
+        .json({ message: "Update data recipe success", data });
+    } else {
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "recipe",
       });
+
+      if (!result) {
+        return res.status(400).json({ message: "Upload image invalid" });
+      }
+
+      if (users_id != dataRecipeId.rows[0].users_id) {
+        return res.status(404).json({ message: "This recipe is not yours!" });
+      }
+
+      console.log("id data");
+      console.log(users_id);
+      console.log(dataRecipeId.rows[0]);
+
+      let data = {
+        title: title || dataRecipeId.rows[0].title,
+        ingredients: ingredients || dataRecipeId.rows[0].ingredients,
+        category_id: parseInt(category_id) || dataRecipeId.rows[0].category_id,
+        image: result.secure_url,
+      };
+
+      putRecipe(data, id);
+      delete data.id;
+      return res
+        .status(200)
+        .json({ message: "Upldate data recipe sucess", data });
     }
 
-    let data = {
-      title: title || dataRecipeId.rows[0].title,
-      ingredients: ingredients || dataRecipeId.rows[0].ingredients,
-      category_id: parseInt(category_id) || dataRecipeId.rows[0].category_id,
-    };
-
-    let result = putRecipe(data, id);
     // console.log(result);
-
-    delete data.id;
-
-    return res
-      .status(200)
-      .json({ status: 200, message: "update data recipe success", data });
   },
 
   deleteDataRecipeById: async (req, res, next) => {

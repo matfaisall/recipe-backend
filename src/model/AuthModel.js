@@ -15,10 +15,11 @@ const getUserByEmail = async (email) => {
   });
 };
 
+// Create user
 const createUser = async (data) => {
   let { name, email, password } = data;
 
-  console.log("create user");
+  // console.log("create user");
 
   return new Promise((resolve, reject) => {
     Pool.query(

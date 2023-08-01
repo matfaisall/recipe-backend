@@ -26,7 +26,7 @@ const getUserById = async (id) => {
 
 const postUser = async (data) => {
   let { name, email, password } = data;
-  console.log("data model: ", data);
+  // console.log("data model: ", data);
   return new Promise((resolve, reject) => {
     Pool.query(
       `INSERT INTO users (name, email, password) VALUES ('${name}', '${email}', '${password}')`,

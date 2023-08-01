@@ -1,4 +1,4 @@
--- Active: 1689598087354@@127.0.0.1@5432@restaurant
+-- Active: 1690893833419@@127.0.0.1@5432@restaurant
 
 DROP TABLE users;
 
@@ -13,7 +13,7 @@ CREATE TABLE
         ingredients TEXT NOT NULL,
         image VARCHAR(255),
         category_id INT NOT NULL,
-        user_id INT NOT NULL
+        users_id INT NOT NULL
     );
 
 ALTER TABLE recipe ADD COLUMN created_at TIMESTAMP DEFAULT NOW();
@@ -38,7 +38,7 @@ CREATE TABLE
         created_at TIMESTAMP DEFAULT NOW()
     );
 
-ALTER TABLE recipe ADD FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE recipe ADD FOREIGN KEY (users_id) REFERENCES users(id);
 
 SELECT * FROM recipe;
 
@@ -71,7 +71,7 @@ INSERT INTO
         ingredients,
         image,
         category_id,
-        user_id
+        users_id
     )
 VALUES (
         'nasi goreng',
@@ -81,7 +81,7 @@ VALUES (
         2
     );
 
-ALTER TABLE recipe RENAME COLUMN user_id TO users_id;
+-- ALTER TABLE recipe RENAME COLUMN user_id TO users_id;
 
 SELECT
     recipe.id,
@@ -105,3 +105,13 @@ UPDATE users
 SET
     password = '$argon2id$v=19$m=65536,t=3,p=4$J6+YWFQOHBLfcVdNu5tntA$50QnlBhSy5bElJ59pYcJZpe6O0Isl4YSa56bt03lXv4'
 WHERE email = 'guest@gmail.com';
+
+-- TRUNCATE TABLE category;
+
+-- TRUNCATE TABLE users;
+
+-- TRUNCATE TABLE recipe;
+
+-- DELETE FROM users WHERE id = 6;
+
+-- SELECT * FROM users;

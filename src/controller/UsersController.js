@@ -12,6 +12,7 @@ const {
 const UsersController = {
   getAllDataUsers: async (req, res, next) => {
     let allDataUsers = await getAllUsers();
+    // console.log(allDataUsers);
     if (allDataUsers) {
       res.status(200).json({
         status: 200,
@@ -71,7 +72,7 @@ const UsersController = {
       password: password || dataUserById.rows[0].password,
     };
 
-    let result = putUser(data, id);
+    putUser(data, id);
 
     delete data.id;
 

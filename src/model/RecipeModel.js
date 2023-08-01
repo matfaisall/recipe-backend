@@ -32,14 +32,13 @@ const getRecipeById = async (id) => {
 };
 
 // Model : for adding recipe data
-
 const postRecipe = async (data) => {
-  const { title, ingredients, category_id, users_id } = data;
+  const { title, ingredients, category_id, users_id, image } = data;
 
-  console.log("ini data model", data);
+  // console.log("ini data model", data);
   return new Promise((resolve, reject) => {
     Pool.query(
-      `INSERT INTO recipe (image, title, ingredients, category_id, users_id) VALUES ('https://placehold.co/600x400', '${title}', '${ingredients}', ${category_id}, ${users_id})`,
+      `INSERT INTO recipe (image, title, ingredients, category_id, users_id) VALUES ('${image}', '${title}', '${ingredients}', ${category_id}, ${users_id})`,
       (error, result) => {
         if (!error) {
           resolve(result);
@@ -51,18 +50,16 @@ const postRecipe = async (data) => {
   });
 };
 
-// functon for chacking email exists of not
-
 // Model : for update recipe data by ID
-
 const putRecipe = async (data, id) => {
-  const { title, ingredients, category_id } = data;
+  const { title, ingredients, category_id, image } = data;
 
   return new Promise((resolve, reject) => {
     Pool.query(
-      `UPDATE recipe SET title='${title}', ingredients='${ingredients}', category_id=${category_id} WHERE id=${id}`,
+      `UPDATE recipe SET title='${title}', ingredients='${ingredients}', category_id=${category_id}, image='${image}' WHERE id=${id}`,
       (error, result) => {
         if (!error) {
+          console.log("ini result model", result);
           resolve(result);
         } else {
           reject(error);

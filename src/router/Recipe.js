@@ -8,27 +8,20 @@ const {
   getFilter,
 } = require("../controller/RecipeController");
 
+const upload = require("../middleware/UploadPhoto");
+
 const express = require("express");
 const router = express.Router();
 
 const { Middleware } = require("../middleware/middleware");
-// const multer = require("multer");
-// const path = require("path");
 
-// const storage = multer.diskStorage({
-//   filename: (req, file, cb) => {
-//     cb(null, Date.now() + path.extname(file.originalname));
-//   },
-// });
+router.get("/filterdata", Middleware, getFilter);
+router.get("/searchdata", Middleware, getSearch);
 
-// const upload = multer({ storage });
-
-router.get("/filterdata", getFilter);
-router.get("/searchdata", getSearch);
 router.get("/", Middleware, getData);
 router.get("/:id", getDataById);
-router.post("/", Middleware, postDataRecipe);
-router.put("/:id", Middleware, putDataRecipe);
+router.post("/", Middleware, upload.single("image"), postDataRecipe);
+router.put("/:id", Middleware, upload.single("image"), putDataRecipe);
 router.delete("/:id", Middleware, deleteDataRecipeById);
 
 module.exports = router;
