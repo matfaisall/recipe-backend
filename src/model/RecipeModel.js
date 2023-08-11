@@ -5,12 +5,13 @@ const Pool = require("../config/db");
 const getRecipe = async () => {
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipe.id, recipe.image, recipe.title, recipe.ingredients, category.name AS category, users.name AS author FROM recipe JOIN category ON recipe.category_id = category_id JOIN users ON recipe.users_id = users.id`,
+      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.image, recipe.created_at, category.name AS category, users.name AS author FROM recipe JOIN category ON recipe.category_id = category.id JOIN users ON recipe.users_id = users.id ORDER BY id DESC`,
       (error, result) => {
         if (!error) {
+          console.log("ini result model", result);
           resolve(result);
         } else {
-          reject(error.message);
+          reject(error);
         }
       }
     );

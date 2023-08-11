@@ -1,4 +1,4 @@
--- Active: 1690893833419@@127.0.0.1@5432@restaurant
+-- Active: 1691295602114@@127.0.0.1@5432@restaurant
 
 DROP TABLE users;
 
@@ -21,7 +21,7 @@ ALTER TABLE recipe ADD COLUMN created_at TIMESTAMP DEFAULT NOW();
 CREATE TABLE
     category(
         id SERIAL PRIMARY KEY,
-        name VARCHAR(255) NOT NULL
+        name VARCHAR NOT NULL
     );
 
 ALTER TABLE recipe
@@ -78,7 +78,7 @@ VALUES (
         'nasi, telur, sambar',
         'https://placehold.co/600x400',
         1,
-        2
+        9
     );
 
 -- ALTER TABLE recipe RENAME COLUMN user_id TO users_id;
@@ -115,3 +115,5 @@ WHERE email = 'guest@gmail.com';
 -- DELETE FROM users WHERE id = 6;
 
 -- SELECT * FROM users;
+
+ALTER TABLE recipe DROP 

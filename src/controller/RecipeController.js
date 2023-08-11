@@ -74,7 +74,7 @@ const RecipeController = {
       image: result.secure_url,
       title: title,
       ingredients: ingredients,
-      category_id: category_id,
+      category_id: parseInt(category_id),
       users_id,
     };
 
