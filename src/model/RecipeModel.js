@@ -85,43 +85,60 @@ const deleteRecipeById = async (id) => {
 };
 
 const getDataSearch = async (data) => {
-  const { search, searchBy, sort, offset, limit } = data;
-  // console.log("sort data:", typeof sort);
-
-  // console.log("search search by - model", search, searchBy);
+  const { search, searchBy, offset, limit, sortBy } = data;
+  console.log("model search");
+  console.log(search, searchBy, offset, limit, sortBy);
 
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.image, category.name AS category FROM recipe JOIN category ON recipe.category_id = category.id WHERE ${searchBy} ILIKE '%${search}%' OFFSET ${offset} LIMIT ${limit}`,
+      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.image, category.name AS category FROM recipe JOIN category ON recipe.category_id = category.id WHERE ${searchBy} ILIKE '%${search}%' ORDER BY recipe.id ${sortBy} OFFSET ${offset} LIMIT ${limit}`,
       (error, result) => {
         if (!error) {
           // console.log("ini adalah result model", result);
           resolve(result);
         } else {
-          reject(error);
+          reject(error.message);
         }
       }
     );
   });
 };
 
-const getDataFilter = async (data) => {
-  const { sort, offset, limit, sortBy } = data;
+const getDataRecipeCount = async (data) => {
+  const { search, searchBy, offset, limit } = data;
+  console.log(search, searchBy, offset, limit);
 
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.image, category.name AS category FROM recipe JOIN category ON recipe.category_id = category.id ORDER BY ${sortBy} ${sort} OFFSET ${offset} LIMIT ${limit}`,
+      `SELECT COUNT(*) FROM recipe JOIN category ON recipe.category_id = category.id WHERE ${searchBy} ILIKE '%${search}%'`,
       (error, result) => {
         if (!error) {
-          // console.log("ini adalah result model", result);
           resolve(result);
         } else {
-          reject(error);
+          reject(error.message);
         }
       }
     );
   });
 };
+
+// const getDataFilter = async (data) => {
+//   const { sort, offset, limit, sortBy } = data;
+
+//   return new Promise((resolve, reject) => {
+//     Pool.query(
+//       `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.image, category.name AS category FROM recipe JOIN category ON recipe.category_id = category.id ORDER BY ${sortBy} ${sort} OFFSET ${offset} LIMIT ${limit}`,
+//       (error, result) => {
+//         if (!error) {
+//           // console.log("ini adalah result model", result);
+//           resolve(result);
+//         } else {
+//           reject(error);
+//         }
+//       }
+//     );
+//   });
+// };
 
 module.exports = {
   getRecipe,
@@ -130,5 +147,6 @@ module.exports = {
   putRecipe,
   deleteRecipeById,
   getDataSearch,
-  getDataFilter,
+  getDataRecipeCount,
+  // getDataFilter,
 };

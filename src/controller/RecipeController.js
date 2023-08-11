@@ -5,7 +5,8 @@ const {
   putRecipe,
   deleteRecipeById,
   getDataSearch,
-  getDataFilter,
+  getDataRecipeCount,
+  // getDataFilter,
 } = require("../model/RecipeModel");
 
 const cloudinary = require("../config/photo");
@@ -192,53 +193,74 @@ const RecipeController = {
     });
   },
 
-  getSearch: async (req, res, next) => {
-    const { search, searchBy, sort, page, limit } = req.query;
+  // getDataDetail: async (req, res, next) => {
+  //   const {search, searchBy, sort, page, limit}
+  // },
 
-    let pagination = page || 1;
+  // Sementara tidak terpakai
+  getSearch: async (req, res, next) => {
+    const { search, searchBy, limit, sortBy } = req.query;
+
+    let page = req.query.page || 1;
     let limiter = limit || 5;
 
     data = {
       search: search || "",
       searchBy: searchBy || "title",
-      offset: (pagination - 1) * limiter,
+      offset: (page - 1) * limiter,
       limit: limit || 5,
-      sort: sort,
+      sortBy: sortBy || "ASC",
     };
 
     let dataSearch = await getDataSearch(data);
+    let dataRecipeCount = await getDataRecipeCount(data);
+
+    let pagination = {
+      totalPage: Math.ceil(dataRecipeCount.rows[0].count / limiter),
+      totalData: parseInt(dataRecipeCount.rows[0].count),
+      pageNow: parseInt(page),
+    };
+
+    // if (dataSearch) {
+    //   res.status(200).json({
+    //     message: "Search data recipe sucess",
+    //     data: dataSearch.rows,
+    //     pagination,
+    //   });
+    // }
 
     if (dataSearch) {
       res.status(200).json({
         status: 200,
         message: "Search Data recipe successfully!",
         data: dataSearch.rows,
+        pagination,
       });
     }
     // console.log(dataSearch);
   },
 
-  getFilter: async (req, res, next) => {
-    const { sort, page, limit, sortBy } = req.query;
-    let pagination = page || 1;
-    let limiter = limit || 5;
+  // getFilter: async (req, res, next) => {
+  //   const { sort, page, limit, sortBy } = req.query;
+  //   let pagination = page || 1;
+  //   let limiter = limit || 5;
 
-    let data = {
-      offset: (pagination - 1) * limiter,
-      limit: limit || 5,
-      sort: sort,
-      sortBy: sortBy,
-    };
+  //   let data = {
+  //     offset: (pagination - 1) * limiter,
+  //     limit: limit || 5,
+  //     sort: sort,
+  //     sortBy: sortBy,
+  //   };
 
-    let dataFilter = await getDataFilter(data);
-    if (dataFilter) {
-      res.status(200).json({
-        status: 200,
-        message: "Filter data recipe successfully!",
-        data: dataFilter.rows,
-      });
-    }
-  },
+  //   let dataFilter = await getDataFilter(data);
+  //   if (dataFilter) {
+  //     res.status(200).json({
+  //       status: 200,
+  //       message: "Filter data recipe successfully!",
+  //       data: dataFilter.rows,
+  //     });
+  //   }
+  // },
 };
 
 module.exports = RecipeController;

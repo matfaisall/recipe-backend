@@ -5,7 +5,7 @@ const {
   putDataRecipe,
   deleteDataRecipeById,
   getSearch,
-  getFilter,
+  // getFilter,
 } = require("../controller/RecipeController");
 
 const upload = require("../middleware/UploadPhoto");
@@ -15,7 +15,7 @@ const router = express.Router();
 
 const { Middleware } = require("../middleware/middleware");
 
-router.get("/filterdata", Middleware, getFilter);
+// router.get("/filterdata", Middleware, getFilter);
 router.get("/searchdata", Middleware, getSearch);
 
 router.get("/", Middleware, getData);
