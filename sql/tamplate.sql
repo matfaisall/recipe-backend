@@ -1,10 +1,10 @@
--- Active: 1691295602114@@127.0.0.1@5432@restaurant
+-- Active: 1693270652522@@127.0.0.1@5432@restaurant
 
-DROP TABLE users;
+-- DROP TABLE users;
 
-DROP TABLE recipe;
+-- DROP TABLE recipe;
 
-DROP TABLE category;
+-- DROP TABLE category;
 
 CREATE TABLE
     recipe (

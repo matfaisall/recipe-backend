@@ -1,5 +1,5 @@
 @url = http://localhost
-@port = 3100
+@port = 4000
 
 ###
-GET {{url}}:{{port}}/recipe
+GET {{url}}:{{port}}/recipe/myrecipe/9

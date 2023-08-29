@@ -6,7 +6,7 @@ const {
   deleteRecipeById,
   getDataSearch,
   getDataRecipeCount,
-  // getDataFilter,
+  getDataFilter,
 } = require("../model/RecipeModel");
 
 const cloudinary = require("../config/photo");
@@ -193,10 +193,6 @@ const RecipeController = {
     });
   },
 
-  // getDataDetail: async (req, res, next) => {
-  //   const {search, searchBy, sort, page, limit}
-  // },
-
   // Sementara tidak terpakai
   getSearch: async (req, res, next) => {
     const { search, searchBy, limit, sortBy } = req.query;
@@ -240,27 +236,36 @@ const RecipeController = {
     // console.log(dataSearch);
   },
 
-  // getFilter: async (req, res, next) => {
-  //   const { sort, page, limit, sortBy } = req.query;
-  //   let pagination = page || 1;
-  //   let limiter = limit || 5;
+  getFilter: async (req, res, next) => {
+    try {
+      const { sort, page, limit, sortBy } = req.query;
+      const { id } = req.payload;
+      console.log(sort);
+      let pagination = page || 1;
+      let limiter = limit || 5;
 
-  //   let data = {
-  //     offset: (pagination - 1) * limiter,
-  //     limit: limit || 5,
-  //     sort: sort,
-  //     sortBy: sortBy,
-  //   };
+      let data = {
+        offset: (pagination - 1) * limiter,
+        limit: limit || 5,
+        sort: sort || "ASC",
+        sortBy: sortBy || "title",
+        id: id,
+      };
 
-  //   let dataFilter = await getDataFilter(data);
-  //   if (dataFilter) {
-  //     res.status(200).json({
-  //       status: 200,
-  //       message: "Filter data recipe successfully!",
-  //       data: dataFilter.rows,
-  //     });
-  //   }
-  // },
+      console.log(data);
+
+      let dataFilter = await getDataFilter(data);
+      if (dataFilter) {
+        res.status(200).json({
+          status: 200,
+          message: "Filter data recipe successfully!",
+          data: dataFilter.rows,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 module.exports = RecipeController;
