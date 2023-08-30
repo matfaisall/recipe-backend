@@ -12,12 +12,13 @@ const port = 4000;
 // use middleware package
 let corsOptions = {
   origin: "*",
+  // credintials: true,
   optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("combined"));
 
 // use multer

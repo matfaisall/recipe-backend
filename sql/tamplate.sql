@@ -1,4 +1,4 @@
--- Active: 1693270652522@@127.0.0.1@5432@restaurant
+-- Active: 1693354203291@@147.139.210.135@5432@faisal01
 
 -- DROP TABLE users;
 
@@ -78,7 +78,7 @@ VALUES (
         'nasi, telur, sambar',
         'https://placehold.co/600x400',
         1,
-        9
+        2
     );
 
 -- ALTER TABLE recipe RENAME COLUMN user_id TO users_id;
