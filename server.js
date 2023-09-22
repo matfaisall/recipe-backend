@@ -4,6 +4,7 @@ const poolClient = require("./src/config/db");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
+const helmet = require("helmet");
 const Router = require("./src/router");
 
 const app = express();
@@ -17,6 +18,7 @@ let corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("combined"));

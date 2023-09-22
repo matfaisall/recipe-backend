@@ -8,6 +8,7 @@ const {
   getDataRecipeCount,
   getDataFilter,
 } = require("../model/RecipeModel");
+const xss = require("xss");
 
 const cloudinary = require("../config/photo");
 
@@ -73,8 +74,8 @@ const RecipeController = {
 
     let data = {
       image: result.secure_url,
-      title: title,
-      ingredients: ingredients,
+      title: xss(title),
+      ingredients: xss(ingredients),
       category_id: parseInt(category_id),
       users_id,
     };
@@ -111,8 +112,8 @@ const RecipeController = {
       }
 
       let data = {
-        title: title || dataRecipeId.rows[0].title,
-        ingredients: ingredients || dataRecipeId.rows[0].ingredients,
+        title: xss(title) || dataRecipeId.rows[0].title,
+        ingredients: xss(ingredients) || dataRecipeId.rows[0].ingredients,
         category_id: parseInt(category_id) || dataRecipeId.rows[0].category_id,
         image: dataRecipeId.rows[0].image,
       };
@@ -216,14 +217,6 @@ const RecipeController = {
       totalData: parseInt(dataRecipeCount.rows[0].count),
       pageNow: parseInt(page),
     };
-
-    // if (dataSearch) {
-    //   res.status(200).json({
-    //     message: "Search data recipe sucess",
-    //     data: dataSearch.rows,
-    //     pagination,
-    //   });
-    // }
 
     if (dataSearch) {
       res.status(200).json({
