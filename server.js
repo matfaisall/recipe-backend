@@ -27,7 +27,7 @@ app.use(morgan("combined"));
 // app.use("/image", express.static("./tmp"));
 
 app.get("/", (req, res) => {
-  res.status(200).json({ status: 200, message: "Server running..." });
+  res.status(200).json({ status: 200, message: "Server is running..." });
 });
 
 app.use(Router);

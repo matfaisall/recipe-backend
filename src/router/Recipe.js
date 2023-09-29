@@ -8,7 +8,7 @@ const {
   getFilter,
 } = require("../controller/RecipeController");
 
-const upload = require("../middleware/UploadPhoto");
+const upload = require("../utils/UploadPhoto");
 
 const express = require("express");
 const router = express.Router();

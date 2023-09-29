@@ -13,6 +13,7 @@ const xss = require("xss");
 const cloudinary = require("../config/photo");
 
 const RecipeController = {
+  // Get All Data Recipe
   getData: async (req, res, next) => {
     let dataRecipe = await getRecipe();
     if (dataRecipe) {
@@ -24,6 +25,7 @@ const RecipeController = {
     }
   },
 
+  // Get Recipe By Id
   getDataById: async (req, res, next) => {
     const { id } = req.params;
     // console.log(id);
@@ -52,14 +54,14 @@ const RecipeController = {
     });
   },
 
-  // Post data
+  // Upload Recipe
   postDataRecipe: async (req, res, next) => {
     const { title, ingredients, category_id } = req.body;
 
     const result = await cloudinary.uploader.upload(req.file.path, {
       folder: "recipe",
     });
-    console.log(result);
+    console.log("ini cloudinary post", result);
 
     // const image = req.file;
     let users_id = req.payload.id;
@@ -158,6 +160,7 @@ const RecipeController = {
     // console.log(result);
   },
 
+  // Delete Recipe
   deleteDataRecipeById: async (req, res, next) => {
     const { id } = req.params;
 
@@ -170,6 +173,7 @@ const RecipeController = {
 
     let users_id = req.payload.id;
     let dataRecipeId = await getRecipeById(parseInt(id));
+    console.log(dataRecipeId);
 
     if (users_id != dataRecipeId.rows[0].users_id) {
       return res.status(404).status({
@@ -177,7 +181,7 @@ const RecipeController = {
         message: "This content is not yours!",
       });
     }
-
+    await cloudinary.uploader.destroy(dataRecipeId.rows[0].image);
     let deleteData = await deleteRecipeById(parseInt(id));
 
     if (!deleteData) {
@@ -194,7 +198,6 @@ const RecipeController = {
     });
   },
 
-  // Sementara tidak terpakai
   getSearch: async (req, res, next) => {
     const { search, searchBy, limit, sortBy } = req.query;
 

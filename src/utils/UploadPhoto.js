@@ -16,7 +16,8 @@ const upload = multer({
     if (
       file.mimetype === "image/png" ||
       file.mimetype === "image/jpg" ||
-      file.mimetype === "image/jpeg"
+      file.mimetype === "image/jpeg" ||
+      file.size <= 5 * 1024 * 1024
     ) {
       cb(null, true);
     } else {

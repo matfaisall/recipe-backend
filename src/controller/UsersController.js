@@ -1,9 +1,11 @@
+const argon2 = require("argon2");
+
 const {
   getAllUsers,
   getUserById,
-  postUser,
   putUser,
-  deleteUserById,
+  // postUser,
+  // deleteUserById,
 } = require("../model/UsersModel");
 
 // console.log("ini controller put user");
@@ -26,8 +28,8 @@ const UsersController = {
     const { id } = req.params;
 
     let dataUserById = await getUserById(parseInt(id));
-
-    if (!dataUserById.rows[0]) {
+    console.log("ini user controller ", dataUserById);
+    if (!dataUserById.rows) {
       return res.status(404).json({
         status: 404,
         message: "Get Data user not found",
@@ -40,31 +42,33 @@ const UsersController = {
       data: dataUserById.rows[0],
     });
   },
-  pushDataUser: async (req, res, next) => {
-    const { name, email, password } = req.body;
+  // pushDataUser: async (req, res, next) => {
+  //   const { name, email, password } = req.body;
 
-    let data = {
-      name: name,
-      email: email,
-      password: password,
-    };
+  //   let data = {
+  //     name: name,
+  //     email: email,
+  //     password: password,
+  //   };
 
-    postUser(data);
+  //   postUser(data);
 
-    return res.status(200).json({
-      status: 200,
-      message: "Post data user successfully",
-      data,
-    });
-  },
+  //   return res.status(200).json({
+  //     status: 200,
+  //     message: "Post data user successfully",
+  //     data,
+  //   });
+  // },
 
   putDataUserById: async (req, res, next) => {
     const { id } = req.params;
-    const { name, email, password } = req.body;
+    let { name, email, password } = req.body;
 
     let dataUserById = await getUserById(parseInt(id));
 
-    // console.log(dataUserById.rows[0]);
+    console.log("ini controller update user: ", dataUserById);
+
+    password = await argon2.hash(password);
 
     let data = {
       name: name || dataUserById.rows[0].name,
@@ -83,25 +87,25 @@ const UsersController = {
     });
   },
 
-  deleteDataUserById: async (req, res, next) => {
-    // console.log(res);
-    const { id } = req.params;
-    // console.log(name, email);
+  // deleteDataUserById: async (req, res, next) => {
+  //   console.log(res);
+  //   const { id } = req.params;
+  //   // console.log(name, email);
 
-    let deleteData = await deleteUserById(parseInt(id));
+  //   let deleteData = await deleteUserById(parseInt(id));
 
-    if (!deleteData) {
-      return res.status(404).json({
-        status: 404,
-        message: "Delete data failed, Data not found",
-      });
-    }
-    return res.status(200).json({
-      status: 200,
-      message: "Delete data user successfully",
-      data: deleteData.rows[0],
-    });
-  },
+  //   if (!deleteData) {
+  //     return res.status(404).json({
+  //       status: 404,
+  //       message: "Delete data failed, Data not found",
+  //     });
+  //   }
+  //   return res.status(200).json({
+  //     status: 200,
+  //     message: "Delete data user successfully",
+  //     data: deleteData.rows[0],
+  //   });
+  // },
 };
 
 module.exports = UsersController;

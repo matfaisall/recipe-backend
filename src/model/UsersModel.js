@@ -2,7 +2,7 @@ const Pool = require("../config/db");
 
 const getAllUsers = async () => {
   return new Promise((resolve, reject) =>
-    Pool.query(`SELECT * FROM users`, (error, result) => {
+    Pool.query(`SELECT * FROM users ORDER BY id DESC`, (error, result) => {
       if (!error) {
         resolve(result);
       } else {
@@ -24,23 +24,24 @@ const getUserById = async (id) => {
   });
 };
 
-const postUser = async (data) => {
-  let { name, email, password } = data;
-  // console.log("data model: ", data);
-  return new Promise((resolve, reject) => {
-    Pool.query(
-      `INSERT INTO users (name, email, password) VALUES ('${name}', '${email}', '${password}')`,
-      (error, result) => {
-        if (!error) {
-          resolve(result);
-        } else {
-          reject(error.message);
-        }
-      }
-    );
-  });
-};
+// const postUser = async (data) => {
+//   let { name, email, password } = data;
+//   // console.log("data model: ", data);
+//   return new Promise((resolve, reject) => {
+//     Pool.query(
+//       `INSERT INTO users (name, email, password) VALUES ('${name}', '${email}', '${password}')`,
+//       (error, result) => {
+//         if (!error) {
+//           resolve(result);
+//         } else {
+//           reject(error.message);
+//         }
+//       }
+//     );
+//   });
+// };
 
+// Edit user
 const putUser = async (data, id) => {
   const { name, email, password } = data;
 
@@ -64,22 +65,22 @@ const putUser = async (data, id) => {
 // const putUser =
 //   "UPDATE users SET name = $1, email=$2, password=$3 WHERE id = $4";
 
-const deleteUserById = async (id) => {
-  return new Promise((resolve, reject) => {
-    Pool.query(`DELETE FROM users WHERE id=${id}`, (error, result) => {
-      if (!error) {
-        resolve(result);
-      } else {
-        reject(error.message);
-      }
-    });
-  });
-};
+// const deleteUserById = async (id) => {
+//   return new Promise((resolve, reject) => {
+//     Pool.query(`DELETE FROM users WHERE id=${id}`, (error, result) => {
+//       if (!error) {
+//         resolve(result);
+//       } else {
+//         reject(error.message);
+//       }
+//     });
+//   });
+// };
 
 module.exports = {
   getAllUsers,
   getUserById,
-  postUser,
+  // postUser,
   putUser,
-  deleteUserById,
+  // deleteUserById,
 };
