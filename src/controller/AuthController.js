@@ -4,7 +4,7 @@ const GenerateToken = require("../../helpers/GenerateToken");
 
 const AuthController = {
   login: async (req, res, next) => {
-    let { email, password } = req.body;
+    const { email, password } = req.body;
     // console.log(email, password);
 
     if (!email || !password) {

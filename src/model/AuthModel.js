@@ -1,5 +1,6 @@
 const Pool = require("../config/db");
 
+// Chack Email | is email registered
 const getUserByEmail = async (email) => {
   return new Promise((resolve, reject) => {
     Pool.query(
@@ -18,8 +19,6 @@ const getUserByEmail = async (email) => {
 // Create user
 const createUser = async (data) => {
   let { name, email, password } = data;
-
-  // console.log("create user");
 
   return new Promise((resolve, reject) => {
     Pool.query(
