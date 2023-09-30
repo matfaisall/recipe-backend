@@ -1,4 +1,4 @@
--- Active: 1693354203291@@147.139.210.135@5432@faisal01
+-- Active: 1696055468436@@127.0.0.1@5432@restaurant
 
 -- DROP TABLE users;
 
@@ -46,7 +46,35 @@ SELECT * FROM category;
 
 SELECT * FROM users;
 
+SELECT * FROM comments;
+
 -- ISI TABLE --
+
+-- New Commands --
+
+ALTER TABLE users
+ADD COLUMN updated_at TIMESTAMP
+WITH TIME ZONE DEFAULT NOW();
+
+-- add table comment --
+
+CREATE TABLE
+    comments(
+        id SERIAL PRIMARY KEY,
+        text VARCHAR,
+        recipe_id INT NOT NULL,
+        users_id INT NOT NULL
+    )
+
+ALTER TABLE comments
+ADD
+    FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE;
+
+ALTER TABLE comments
+ADD
+    FOREIGN KEY (recipe_id) REFERENCES recipe(id) ON DELETE CASCADE;
+
+-- end new commands
 
 INSERT INTO
     users (name, email, password, photo)

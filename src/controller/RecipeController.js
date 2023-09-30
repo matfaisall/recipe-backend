@@ -57,6 +57,7 @@ const RecipeController = {
   // Upload Recipe
   postDataRecipe: async (req, res, next) => {
     const { title, ingredients, category_id } = req.body;
+    let defaultPublicId = "recipe/fnn2bwyvrqf5mius7wom.jpg";
 
     const result = await cloudinary.uploader.upload(req.file.path, {
       folder: "recipe",
@@ -172,16 +173,17 @@ const RecipeController = {
     }
 
     let users_id = req.payload.id;
+    // console.log("ini users id delete", users_id);
     let dataRecipeId = await getRecipeById(parseInt(id));
-    console.log(dataRecipeId);
+    // console.log("ini data recipe id", dataRecipeId);
 
     if (users_id != dataRecipeId.rows[0].users_id) {
-      return res.status(404).status({
+      return res.status(404).json({
         status: 404,
         message: "This content is not yours!",
       });
     }
-    await cloudinary.uploader.destroy(dataRecipeId.rows[0].image);
+    // await cloudinary.uploader.destroy(dataRecipeId.rows[0].image);
     let deleteData = await deleteRecipeById(parseInt(id));
 
     if (!deleteData) {

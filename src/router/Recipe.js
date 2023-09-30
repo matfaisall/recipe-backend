@@ -13,16 +13,18 @@ const upload = require("../utils/UploadPhoto");
 const express = require("express");
 const router = express.Router();
 
-const { Middleware } = require("../middleware/middleware");
+// const { Middleware } = require("../middleware/middleware");
 
-router.get("/filterdata", Middleware, getFilter);
+const { AuthChecker } = require("../middleware/authChecker");
 
-router.get("/searchdata", Middleware, getSearch);
+router.get("/filterdata", AuthChecker, getFilter);
 
-router.get("/", Middleware, getData);
-router.get("/:id", Middleware, getDataById);
-router.post("/", Middleware, upload.single("image"), postDataRecipe);
-router.put("/:id", Middleware, upload.single("image"), putDataRecipe);
-router.delete("/:id", Middleware, deleteDataRecipeById);
+router.get("/searchdata", AuthChecker, getSearch);
+
+router.get("/", AuthChecker, getData);
+router.get("/:id", AuthChecker, getDataById);
+router.post("/", AuthChecker, upload.single("image"), postDataRecipe);
+router.put("/:id", AuthChecker, upload.single("image"), putDataRecipe);
+router.delete("/:id", AuthChecker, deleteDataRecipeById);
 
 module.exports = router;
