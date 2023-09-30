@@ -1,6 +1,6 @@
 const argon2 = require("argon2");
 const { getUserByEmail, createUser } = require("../model/AuthModel");
-const GenerateToken = require("../../helpers/GenerateToken");
+const GenerateToken = require("../utils/GenerateToken");
 
 const AuthController = {
   login: async (req, res, next) => {
@@ -78,6 +78,7 @@ const AuthController = {
       name,
       email,
       password,
+      photo: "https://placehold.co/200x200",
     };
 
     console.log(dataUser);
