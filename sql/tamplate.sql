@@ -74,7 +74,39 @@ ALTER TABLE comments
 ADD
     FOREIGN KEY (recipe_id) REFERENCES recipe(id) ON DELETE CASCADE;
 
--- end new commands
+-- add liked table
+
+CREATE TABLE
+    liked(
+        id SERIAL PRIMARY KEY,
+        recipe_id INT NOT NULL,
+        users_id INT NOT NULL
+    );
+
+ALTER TABLE liked
+ADD
+    FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE;
+
+ALTER TABLE liked
+ADD
+    FOREIGN KEY (recipe_id) REFERENCES recipe(id) ON DELETE CASCADE -- end new commands
+
+-- add bookmark TABLE
+
+CREATE TABLE
+    bookmark(
+        id SERIAL PRIMARY KEY,
+        recipe_id INT NOT NULL,
+        users_id INT NOT NULL
+    );
+
+ALTER TABLE bookmark
+ADD
+    FOREIGN KEY (recipe_id) REFERENCES recipe(id) ON DELETE CASCADE;
+
+ALTER TABLE bookmark
+ADD
+    FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE;
 
 INSERT INTO
     users (name, email, password, photo)

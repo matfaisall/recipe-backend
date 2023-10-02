@@ -236,9 +236,9 @@ const RecipeController = {
 
   getFilter: async (req, res, next) => {
     try {
-      const { sort, page, limit, sortBy } = req.query;
+      const { sort, sortBy, page, limit } = req.query;
       const { id } = req.payload;
-      console.log(sort);
+
       let pagination = page || 1;
       let limiter = limit || 5;
 
@@ -250,7 +250,7 @@ const RecipeController = {
         id: id,
       };
 
-      console.log(data);
+      console.log("ini payload:", req.payload);
 
       let dataFilter = await getDataFilter(data);
       if (dataFilter) {
@@ -261,7 +261,7 @@ const RecipeController = {
         });
       }
     } catch (error) {
-      console.log(error);
+      console.log("terjadi kesalahan", error);
     }
   },
 };

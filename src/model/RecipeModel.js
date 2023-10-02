@@ -124,7 +124,7 @@ const getDataRecipeCount = async (data) => {
 
 const getDataFilter = async (data) => {
   const { sort, offset, limit, sortBy, id } = data;
-  console.log("id model", id);
+  console.log("id model", data);
 
   return new Promise((resolve, reject) => {
     Pool.query(
@@ -134,7 +134,7 @@ const getDataFilter = async (data) => {
           // console.log("ini adalah result model", result);
           resolve(result);
         } else {
-          reject(error);
+          reject("terjadi kesalhan", error);
         }
       }
     );
