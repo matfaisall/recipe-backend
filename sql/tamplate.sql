@@ -56,6 +56,14 @@ ALTER TABLE users
 ADD COLUMN updated_at TIMESTAMP
 WITH TIME ZONE DEFAULT NOW();
 
+-- add collumn on table recipe
+
+ALTER TABLE recipe ADD COLUMN like_count INT;
+
+ALTER TABLE recipe ADD COLUMN saved_count INT;
+
+ALTER TABLE recipe ADD COLUMN comment_count INT;
+
 -- add table comment --
 
 CREATE TABLE
@@ -154,6 +162,16 @@ FROM recipe
 ORDER BY title DESC
 OFFSET 0
 LIMIT 5;
+
+-- test comment --
+
+SELECT
+    comments.text,
+    users.name,
+    users.photo
+FROM comments
+    JOIN users ON comments.users_id = users.id
+WHERE comments.recipe_id = 35;
 
 -- Test login ---
 

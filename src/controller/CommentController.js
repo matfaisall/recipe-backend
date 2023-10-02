@@ -1,5 +1,10 @@
 // export from model
-const { getDataComment, postDataCommmet } = require("../model/CommentModel");
+const {
+  getDataComment,
+  postDataCommmet,
+  getCommentCount,
+  updateCommentRecipe,
+} = require("../model/CommentModel");
 
 const CommentController = {
   getComments: async (req, res) => {
@@ -25,11 +30,13 @@ const CommentController = {
       users_id,
     };
 
-    let result = await postDataCommmet(data);
+    await postDataCommmet(data);
+    let dataRecipeCount = await getCommentCount(data);
+    console.log("data recipe count", dataRecipeCount);
+    await updateCommentRecipe(dataRecipeCount.rows[0].count, parseInt(id)); //...
 
     return res.status(201).json({
       message: "Your comment has been set successfully",
-      data,
     });
 
     console.log("ini comment");
