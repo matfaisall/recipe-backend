@@ -1,4 +1,4 @@
--- Active: 1696055468436@@127.0.0.1@5432@restaurant
+-- Active: 1693354203291@@147.139.210.135@5432@faisal01
 
 -- DROP TABLE users;
 
