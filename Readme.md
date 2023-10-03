@@ -25,66 +25,69 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Food Recipes Rest API is server api that used in [`Food Recipes application`](https://fe-food-recepies.vercel.app) . This server manage all function and endpoint in Food recipes app such as create, add , update and delete recipe. Authentication about login, register and getting profile info.
+Food Recipes Rest API is server api that used in [`Food Recipes application`](https://fe-food-recepies.vercel.app) . This server manage all function and endpoint in Food recipes app such as create, add , update and delete recipe, Authentication about login, register, getting profile, and also comment recipe, like, bookmark recipe.
 
 
 ### Built With
 
-* [Node JS](https://nodejs.org/en/docs/)
+* [Node JS](https://nodejs.org/en/docs)
 * [Express JS](https://expressjs.com/)
 * [Nodemailer Package](https://www.npmjs.com/package/nodemailer)
 * [Cloudinary](https://cloudinary.com/)
 * [Morgan Package](https://www.npmjs.com/package/morgan)
 * [DotEnv Package](https://www.npmjs.com/package/dotenv)
 * [JWT Package](https://www.npmjs.com/package/jsonwebtoken)
-* [UUID Package](https://www.npmjs.com/package/uuid)
 * [Multer Package](https://www.npmjs.com/package/multer)
-* [Bcrypt Package](https://www.npmjs.com/package/bcrypt)
+* [Argon2 Package](https://www.npmjs.com/package/bcrypt)
+* [XSS middleware](https://www.npmjs.com/package/xss)
+* [Helmet middleware](https://www.npmjs.com/package/helmet)
+* Etc.
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+Before going to the installation stage there are some software that must be installed first.
 
-* [nodejs](https://nodejs.org/en/download/)
+* [NodeJs V18.00^](https://nodejs.org/en/download/)
 
 ### Installation
 
 1. Clone the repo
-```sh
-https://github.com/NisrinaNataraharja/BE-Food-Recipes.git
 ```
-2. Install NPM packages
-```sh
+git clone https://github.com/matfaisall/recipe-backend.git
+```
+2. Go to repo
+```
+cd recipe-backend
+```
+3. Install NPM packages
+```
 npm install
 ```
-3. Add .env file at root folder project, and add following
-```sh
 
-PORT = 5000
-SECRET_KEY = 'secret shhhh' // or use your own
-CLOUD_NAME = your cloduinary username
-API_KEY = your cloduinary api key
-API_SECRET = your cloduinary api secret
-DB_USERNAME = your_db_username
-DB_HOST = your_host
-DB_DATABASE = your_db_name
-DB_PASSWORD = your_password
-DB_PORT = your_db_port
+4. Add .env file at root folder project, and add following
+```
+PORT=4000
 
-PORT = 5000 or your localhost port
+DB_HOST=your_db_host
+DB_PORT=your_db_port
+DB_DATABASE=your_db_name
+DB_USER=your_db_username
+DB_PASSWORD=your_db_password
 
-NODE_ENV = dev or prod
+JWT_TOKEN=your_jwt_token
 
-SECRET_KEY = secret_key_for_JWT
+CLOUD_NAME=your_cloduinary_username
+CLOUD_API_KEY=your_cloduinary_api_key
+CLOUD_API_SECRET=your_cloduinary_api_secret
 
 EMAIL_FOR_SENDEMAIL = email_for_sendemail_nodemailer
 PASS_SEND_EMAIL = email_password_sendemail_nodemailer
 
 ```
-
+5. Try it
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -95,15 +98,14 @@ Contributions are what make the open source community such an amazing place to b
 2. Create your Feature Branch (`git checkout -b your/branch`)
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/yourbranch`)
-5. Open a Pull Request
+5. Open a Pull Request on Github
 
 
 
 <!-- RELATED PROJECT -->
 ## Related Project
-* [`Food Recipes Demo`](https://fe-food-recepies.vercel.app)
-* [`Food Recipes Rest API`](https://food-recipes98.herokuapp.com/)
-* [`Food Recipes Frontend Repository`](https://github.com/NisrinaNataraharja/FE-Food-Recipes)
+:computer:  [`Food Recipes Demo`](...)
+:books:  [`Food Recipes Rest API`](https://alive-overshirt-bear.cyclic.app/)
 
 
 <!-- CONTACT -->
@@ -112,4 +114,19 @@ Contributions are what make the open source community such an amazing place to b
 Contributors names and contact info
 
 * AUTHOR
-  * Nisrina Nataraharja [@NisrinaNataraharja](https://github.com/NisrinaNataraharja)
+<table>
+  <tr >
+    <td align="left">
+      <a href="https://github.com/matfaisall">
+          <img width="100" src="https://avatars.githubusercontent.com/u/88364541?v=4" alt="Muhammad Faisal"> <br/>
+          <sub><b>Muhammad Faisal</b></sub> <br/>
+          <sub>Lead Frontend | Frontend Web Developer</sub>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://www.linkedin.com/in/matfaisall/">[LinkedIn Account]</a>
+    </td>
+  </tr>
+</table>
