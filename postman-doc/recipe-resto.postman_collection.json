@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "07fc6f67-6735-4441-9f1b-98f4213ee2f2",
-		"name": "restaurant-backend",
+		"name": "recipe-resto",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "14945105"
 	},
@@ -40,22 +40,22 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "nasi bakar lezat",
+									"value": "Nasi Kuning Khas Madiun 2",
 									"type": "text"
 								},
 								{
 									"key": "ingredients",
-									"value": "nasi, ikan, sambal",
+									"value": "nasi kuning 2",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/muhfa/Downloads/search-menu3.jpg"
+									"src": "/C:/Users/muhfa/Downloads/search-menu1.jpg"
 								},
 								{
 									"key": "category_id",
-									"value": "2",
+									"value": "1",
 									"type": "text"
 								}
 							]
@@ -102,16 +102,26 @@
 				{
 					"name": "Get data recipe by ID",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/recipe/3",
+							"raw": "{{url}}/recipe/24",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"recipe",
-								"3"
+								"24"
 							]
 						}
 					},
@@ -143,24 +153,35 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "nasi cumi biasa",
+									"value": "Nasi jagung bakar",
+									"type": "text"
+								},
+								{
+									"key": "ingredients",
+									"value": "nasi jagung di bakar",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/muhfa/Downloads/popular-recipe5.jpg"
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{url}}/recipe/1",
+							"raw": "{{url}}/recipe/35",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"recipe",
-								"1"
+								"35"
 							]
 						}
 					},
@@ -182,13 +203,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/recipe/2",
+							"raw": "{{url}}/recipe/24",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"recipe",
-								"2"
+								"24"
 							]
 						}
 					},
@@ -199,54 +220,6 @@
 		{
 			"name": "Users",
 			"item": [
-				{
-					"name": "Register",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "",
-								"value": "",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "name",
-									"value": "zoids",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "zoids@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "leozoids",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/users",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "Get all users",
 					"request": {
@@ -280,13 +253,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/users/9",
+							"raw": "{{url}}/users/3",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"users",
-								"9"
+								"3"
 							]
 						}
 					},
@@ -302,51 +275,30 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "liger zero",
+									"value": "C. Ronaldo",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "liger",
+									"value": "ronaldo",
 									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "{{url}}/users/5",
+							"raw": "{{url}}/users/17",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"users",
-								"5"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete data user by ID",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/users/5",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"5"
+								"17"
 							]
 						}
 					},
@@ -400,17 +352,17 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "faisal",
+									"value": "messi10",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "faisal@gmail.com",
+									"value": "messi10@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "123456",
+									"value": "messi10",
 									"type": "text"
 								}
 							]
@@ -431,102 +383,10 @@
 			]
 		},
 		{
-			"name": "Enpoint-middleware-recipe",
+			"name": "category",
 			"item": [
 				{
-					"name": "Post Recipe Middleware",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibmFtZSI6ImZhaXNhbCIsImVtYWlsIjoiZmFpc2FsQGdtYWlsLmNvbSIsInBob3RvIjpudWxsLCJjcmVhdGVkX2F0IjoiMjAyMy0wNy0yNlQwNDo1Nzo0Mi44NjdaIiwiaWF0IjoxNjkwMzQ3NDg0fQ.8FKEwRYZQQ2SbK6_Axc7o3Xa8EQ2j58mOrodD36ii-o",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "",
-								"value": "",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "title",
-									"value": "nasi goreng",
-									"type": "text"
-								},
-								{
-									"key": "ingredients",
-									"value": "nasi, jagung, sambarl, digoreng",
-									"type": "text"
-								},
-								{
-									"key": "category_id",
-									"value": "1",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/recipe",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"recipe"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get all recipe Middleware",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibmFtZSI6ImZhaXNhbCIsImVtYWlsIjoiZmFpc2FsQGdtYWlsLmNvbSIsInBob3RvIjpudWxsLCJjcmVhdGVkX2F0IjoiMjAyMy0wNy0yNlQwNDo1Nzo0Mi44NjdaIiwiaWF0IjoxNjkwMzQ3NDg0fQ.8FKEwRYZQQ2SbK6_Axc7o3Xa8EQ2j58mOrodD36ii-o",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": []
-						},
-						"url": {
-							"raw": "{{url}}/recipe",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"recipe"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Put Recipe by ID Middleware",
+					"name": "Get all Categories",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -538,72 +398,15 @@
 								}
 							]
 						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "title",
-									"value": "nasi pecel",
-									"type": "text"
-								},
-								{
-									"key": "category_id",
-									"value": "3",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/recipe/15",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"recipe",
-								"15"
-							],
-							"query": [
-								{
-									"key": "title",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete recipe by ID Middleware",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibmFtZSI6ImZhaXNhbCIsImVtYWlsIjoiZmFpc2FsQGdtYWlsLmNvbSIsInBob3RvIjpudWxsLCJjcmVhdGVkX2F0IjoiMjAyMy0wNy0yNlQwNDo1Nzo0Mi44NjdaIiwiaWF0IjoxNjkwMzQ3NDg0fQ.8FKEwRYZQQ2SbK6_Axc7o3Xa8EQ2j58mOrodD36ii-o",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/recipe/15",
+							"raw": "{{url}}/category",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"recipe",
-								"15"
+								"category"
 							]
 						}
 					},
@@ -612,117 +415,307 @@
 			]
 		},
 		{
-			"name": "Get all Categories",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
+			"name": "comment",
+			"item": [
+				{
+					"name": "post comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "text",
+									"value": "enak sekali makanannya.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/comment/28",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comment",
+								"28"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}/category",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"category"
-					]
+				{
+					"name": "get comment by recipe id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/comment/28",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comment",
+								"28"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "get Data Search",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}/recipe/searchdata?search=nasi",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"recipe",
-						"searchdata"
-					],
-					"query": [
-						{
-							"key": "search",
-							"value": "nasi"
+			"name": "likeRecipe",
+			"item": [
+				{
+					"name": "postLike",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
-						{
-							"key": "searchBy",
-							"value": "ingredients",
-							"description": "title || ingredients",
-							"disabled": true
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/like/28",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"like",
+								"28"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "getLike",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/like",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"like"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "get Data Filter",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
+			"name": "bookmarkRecipe",
+			"item": [
+				{
+					"name": "postBookmark",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bookmark/28",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bookmark",
+								"28"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}/recipe/filterdata?sortBy=created_at&sort=desc&page=1&limit=5",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"recipe",
-						"filterdata"
-					],
-					"query": [
-						{
-							"key": "sortBy",
-							"value": "created_at"
+				{
+					"name": "getBookmark",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
-						{
-							"key": "sort",
-							"value": "desc"
-						},
-						{
-							"key": "page",
-							"value": "1"
-						},
-						{
-							"key": "limit",
-							"value": "5"
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bookmark",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bookmark"
+							]
 						}
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "filterAndSearch",
+			"item": [
+				{
+					"name": "filterByUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}/recipe/filterdata?sortBy=title&sort=desc&page=1&limit=5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"recipe",
+								"filterdata"
+							],
+							"query": [
+								{
+									"key": "sortBy",
+									"value": "title"
+								},
+								{
+									"key": "sort",
+									"value": "desc"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Data Search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/recipe/searchdata?search=nasi&searchBy=title&limit=5&sortBy=DESC",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"recipe",
+								"searchdata"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "nasi"
+								},
+								{
+									"key": "searchBy",
+									"value": "title",
+									"description": "title || ingredients"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "sortBy",
+									"value": "DESC"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
