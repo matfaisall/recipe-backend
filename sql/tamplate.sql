@@ -173,6 +173,40 @@ FROM comments
     JOIN users ON comments.users_id = users.id
 WHERE comments.recipe_id = 35;
 
+SELECT
+    liked.recipe_id,
+    recipe.category_id,
+    recipe.title,
+    recipe.ingredients,
+    recipe.like_count,
+    recipe.saved_count,
+    recipe.comment_count,
+    recipe.image,
+    category.name AS category,
+    users.name AS author
+FROM liked
+    JOIN recipe ON liked.recipe_id = recipe.id
+    JOIN category ON recipe.category_id = category.id
+    JOIN users ON recipe.users_id = users.id
+WHERE liked.users_id = 9;
+
+SELECT
+    liked.recipe_id,
+    recipe.category_id,
+    recipe.title,
+    recipe.ingredients,
+    recipe.like_count,
+    recipe.saved_count,
+    recipe.comment_count,
+    recipe.image,
+    category.name AS category,
+    users.name AS author
+FROM liked
+    JOIN recipe ON liked.recipe_id = recipe.id
+    JOIN category ON recipe.category_id = category.id
+    JOIN users ON recipe.users_id = users.id
+WHERE liked.users_id = 9
+
 -- Test login ---
 
 SELECT * FROM users WHERE email='guest@gmail.com';
