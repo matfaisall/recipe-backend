@@ -2,6 +2,8 @@
 
 SELECT * FROM users;
 
+SELECT * FROM recipe;
+
 -- test get bookmarked
 
 SELECT
@@ -20,3 +22,23 @@ FROM bookmark
     JOIN category ON recipe.category_id = category.id
     JOIN users ON recipe.users_id = users.id
 WHERE bookmark.users_id = 9;
+
+SELECT
+    recipe.id,
+    recipe.title,
+    recipe.ingredients,
+    recipe.image,
+    recipe.like_count,
+    recipe.saved_count,
+    recipe.comment_count,
+    category.name AS category,
+    users.name AS author,
+    users.photo
+FROM recipe
+    JOIN category ON recipe.category_id = category.id
+    JOIN users ON recipe.users_id = users.id
+WHERE
+    recipe.title ILIKE '%nasi%'
+ORDER BY recipe.id DESC
+OFFSET 1
+LIMIT 5

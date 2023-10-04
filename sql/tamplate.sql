@@ -58,11 +58,17 @@ WITH TIME ZONE DEFAULT NOW();
 
 -- add collumn on table recipe
 
-ALTER TABLE recipe ADD COLUMN like_count INT;
+ALTER TABLE recipe ADD COLUMN like_count INT DEFAULT 0;
+
+ALTER TABLE recipe ALTER COLUMN like_count SET DEFAULT 0;
 
 ALTER TABLE recipe ADD COLUMN saved_count INT;
 
+ALTER TABLE recipe ALTER COLUMN saved_count SET DEFAULT 0;
+
 ALTER TABLE recipe ADD COLUMN comment_count INT;
+
+ALTER TABLE recipe ALTER COLUMN comment_count SET DEFAULT 0;
 
 -- add table comment --
 

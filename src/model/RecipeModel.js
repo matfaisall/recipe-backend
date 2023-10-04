@@ -86,12 +86,12 @@ const deleteRecipeById = async (id) => {
 
 const getDataSearch = async (data) => {
   const { search, searchBy, offset, limit, sortBy } = data;
-  console.log("model search");
-  console.log(search, searchBy, offset, limit, sortBy);
+  // console.log("model search");
+  // console.log(search, searchBy, offset, limit, sortBy);
 
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.image, category.name AS category FROM recipe JOIN category ON recipe.category_id = category.id WHERE ${searchBy} ILIKE '%${search}%' ORDER BY recipe.id ${sortBy} OFFSET ${offset} LIMIT ${limit}`,
+      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.image, recipe.like_count,recipe.saved_count,recipe.comment_count, category.name AS category, users.name AS author, users.photo FROM recipe JOIN category ON recipe.category_id = category.id JOIN users ON recipe.users_id = users.id WHERE ${searchBy} ILIKE '%${search}%' ORDER BY recipe.id ${sortBy} OFFSET ${offset} LIMIT ${limit}`,
       (error, result) => {
         if (!error) {
           // console.log("ini adalah result model", result);
@@ -105,8 +105,8 @@ const getDataSearch = async (data) => {
 };
 
 const getDataRecipeCount = async (data) => {
-  const { search, searchBy, offset, limit } = data;
-  console.log(search, searchBy, offset, limit);
+  const { search, searchBy } = data;
+  // console.log(search, searchBy, offset, limit);
 
   return new Promise((resolve, reject) => {
     Pool.query(
