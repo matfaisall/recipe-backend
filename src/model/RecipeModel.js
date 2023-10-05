@@ -128,7 +128,7 @@ const getDataFilter = async (data) => {
 
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.image, category.name AS category, users.name AS author FROM recipe JOIN category ON recipe.category_id = category.id JOIN users ON recipe.users_id = users.id WHERE users_id=${id} ORDER BY ${sortBy} ${sort} OFFSET ${offset} LIMIT ${limit}`,
+      `SELECT recipe.id, recipe.title, recipe.ingredients, recipe.like_count, recipe.saved_count, recipe.comment_count, recipe.image,  category.name AS category, users.name AS author FROM recipe JOIN category ON recipe.category_id = category.id JOIN users ON recipe.users_id = users.id WHERE users_id=${id} ORDER BY ${sortBy} ${sort} OFFSET ${offset} LIMIT ${limit}`,
       (error, result) => {
         if (!error) {
           // console.log("ini adalah result model", result);
