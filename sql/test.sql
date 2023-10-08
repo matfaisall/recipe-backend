@@ -42,3 +42,17 @@ WHERE
 ORDER BY recipe.id DESC
 OFFSET 1
 LIMIT 5
+
+SELECT
+    recipe.title,
+    recipe.ingredients,
+    recipe.image,
+    recipe.like_count,
+    recipe.saved_count,
+    recipe.comment_count,
+    users.name AS author,
+    category.name AS category
+FROM recipe
+    JOIN users ON recipe.users_id = users.id
+    JOIN category ON recipe.category_id = category.id
+WHERE recipe.id = 35;

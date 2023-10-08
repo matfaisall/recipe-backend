@@ -22,13 +22,28 @@ const getRecipe = async () => {
 
 const getRecipeById = async (id) => {
   return new Promise((resolve, reject) => {
-    Pool.query(`SELECT * FROM recipe WHERE id=${id}`, (error, result) => {
-      if (!error) {
-        resolve(result);
-      } else {
-        reject(error.message);
+    Pool.query(
+      `SELECT
+    recipe.title,
+    recipe.ingredients,
+    recipe.image,
+    recipe.like_count,
+    recipe.saved_count,
+    recipe.comment_count,
+    users.name AS author,
+    category.name AS category
+FROM recipe
+    JOIN users ON recipe.users_id = users.id
+    JOIN category ON recipe.category_id = category.id
+WHERE recipe.id = ${id}`,
+      (error, result) => {
+        if (!error) {
+          resolve(result);
+        } else {
+          reject(error.message);
+        }
       }
-    });
+    );
   });
 };
 
