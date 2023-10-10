@@ -18,12 +18,25 @@ const getRecipe = async () => {
   });
 };
 
-// Model : for showing recipe data by ID
+// for update and delete
+const recipebyId = async (id) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`SELECT * FROM recipe WHERE id=${id}`, (error, result) => {
+      if (!error) {
+        resolve(result);
+      } else {
+        reject(error);
+      }
+    });
+  });
+};
 
+// Model : for showing recipe data by ID
 const getRecipeById = async (id) => {
   return new Promise((resolve, reject) => {
     Pool.query(
       `SELECT
+      recipe.id,
     recipe.title,
     recipe.ingredients,
     recipe.image,
@@ -165,4 +178,5 @@ module.exports = {
   getDataSearch,
   getDataRecipeCount,
   getDataFilter,
+  recipebyId,
 };

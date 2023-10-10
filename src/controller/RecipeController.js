@@ -1,6 +1,7 @@
 const {
   getRecipe,
   getRecipeById,
+  recipebyId,
   postRecipe,
   putRecipe,
   deleteRecipeById,
@@ -103,7 +104,7 @@ const RecipeController = {
         .json({ message: "your ID uncorrect! or Your ID not found!!" });
     }
 
-    let dataRecipeId = await getRecipeById(parseInt(id));
+    let dataRecipeId = await recipebyId(parseInt(id));
     let users_id = req.payload.id;
 
     console.log(req.file);
@@ -173,9 +174,10 @@ const RecipeController = {
     }
 
     let users_id = req.payload.id;
-    // console.log("ini users id delete", users_id);
-    let dataRecipeId = await getRecipeById(parseInt(id));
-    // console.log("ini data recipe id", dataRecipeId);
+    let dataRecipeId = await recipebyId(parseInt(id));
+
+    console.log("ini users id delete", users_id);
+    console.log("ini data recipe id", dataRecipeId);
 
     if (users_id != dataRecipeId.rows[0].users_id) {
       return res.status(404).json({
@@ -185,6 +187,7 @@ const RecipeController = {
     }
     // await cloudinary.uploader.destroy(dataRecipeId.rows[0].image);
     let deleteData = await deleteRecipeById(parseInt(id));
+    console.log("ini delete data", deleteData);
 
     if (!deleteData) {
       return res.status(404).json({
