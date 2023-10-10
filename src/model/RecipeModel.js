@@ -40,6 +40,7 @@ const getRecipeById = async (id) => {
     recipe.title,
     recipe.ingredients,
     recipe.image,
+    recipe.category_id,
     recipe.like_count,
     recipe.saved_count,
     recipe.comment_count,
