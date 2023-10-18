@@ -1,11 +1,18 @@
 
-<p align="center">
+<br />
+<div align="center">
+  <a href="https://github.com/matfaisall/recipe-frontend-redux" target="_blank">
+    <img src="https://res.cloudinary.com/dmx0spvee/image/upload/v1696560135/web-recipe-redux/mamarecipe-logo_ofcf8k.png" alt="Mama Recipe" width="150px">
+  </a>
 
   <h3 align="center">Food Recipes Rest API</h3>
-  <p align="center">
-    <image align="center" width="200" src='https://github.com/NisrinaNataraharja/FE-Food-Recipes/blob/main/public/images/screenshoot/logo.png' />
-  </p>
 
+  <p align="center">
+    <a href="https://github.com/matfaisall/recipe-backend/issues" target="_blank">Report Bug</a>
+    -
+    <a href="https://github.com/matfaisall/recipe-backend/issues" target="_blank">Request Feature</a>
+  </p>
+</div>
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
@@ -104,8 +111,9 @@ Contributions are what make the open source community such an amazing place to b
 
 <!-- RELATED PROJECT -->
 ## Related Project
-:computer:  [`Food Recipes Demo`](...)
-:books:  [`Food Recipes Rest API`](https://alive-overshirt-bear.cyclic.app/)
+:books:  [`Food Recipes Rest API`](https://github.com/matfaisall/recipe-backend)
+:books:  [`Food Recipes Frontend`](https://github.com/matfaisall/recipe-frontend-redux)
+:books:  [`Food Recipes Mobile`](https://github.com/matfaisall/recipe-reactnative)
 
 
 <!-- CONTACT -->
